@@ -23,7 +23,6 @@ import com.example.anders.breakout.sprites.Block;
 
 import com.example.anders.breakout.sprites.Player;
 import com.example.anders.breakout.sprites.RetryButton;
-import com.example.anders.breakout.sprites.Sprite;
 
 
 import java.text.SimpleDateFormat;
@@ -66,6 +65,8 @@ public class GameView extends SurfaceView{
     public int bounceSoundID, hitSoundID, lifeLossSoundID, winSoundID;
 
     public boolean gameStarted = false;
+
+    private int numberOfBlocks = 6;
 
 
 
@@ -177,6 +178,10 @@ public class GameView extends SurfaceView{
             }
 
             checkBlockCollision();
+            if(numberOfBlocks==0){
+                resetBlocks();
+            }
+
 
             if(!ball.exists){
                 if(ball.win){
@@ -265,6 +270,7 @@ public class GameView extends SurfaceView{
                     playSound(hitSoundID);
                     ball.reverseYSpeed();
                     Player.score++;
+                    numberOfBlocks--;
                 }
             }
         }
@@ -429,7 +435,17 @@ public class GameView extends SurfaceView{
             b.setOpaque();
         }
 
+        numberOfBlocks = 6;
+
         startTime = System.currentTimeMillis();
+    }
+
+    public void resetBlocks(){
+        for(Block b : blocks){
+            b.setExist();
+            b.setOpaque();
+        }
+        numberOfBlocks = 6;
     }
 
     public void initiateSoundPool(){

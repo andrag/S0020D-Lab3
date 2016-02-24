@@ -1,5 +1,6 @@
 package com.example.anders.breakout.game_engine;
 
+import android.annotation.SuppressLint;
 import android.graphics.Canvas;
 
 /**
@@ -18,6 +19,7 @@ public class GameLoopThread extends Thread{
         running = run;
     }
 
+    @SuppressLint("WrongCall")
     @Override
     public void run() {
         //Variables for calculating thread sleep time, for even motion.
